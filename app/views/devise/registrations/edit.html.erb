@@ -1,0 +1,42 @@
+<h2><%= t "Edit_profile" %></h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div class="field">
+    <b><%=  t('Email') %></b><br />
+    <%= f.email_field :email, autofocus: true %>
+  </div>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+  <div class="field">
+    <b><%=  t('Password_new') %></b><br />
+    <%= f.password_field :password, autocomplete: "off" %>
+    <% if @minimum_password_length %>
+      <br />
+      <em><%= @minimum_password_length %> characters minimum</em>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <b><%=  t('Password_again') %></b><br />
+    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+  </div>
+
+  <div class="field">
+    <b><%=  t('Password') %></b><br />
+    <%= f.password_field :current_password, autocomplete: "off" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit t('Update') %>
+  </div>
+<% end %>
+
+
+<p> <%= button_to t('Cancel_my_account'), registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+
+<%= link_to t('Back'), :back %>
